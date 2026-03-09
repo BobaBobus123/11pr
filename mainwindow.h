@@ -2,8 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QStandardItemModel>
 #include <QLabel>
+#include "tickettablemodel.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -19,11 +19,13 @@ private slots:
     void onActionNew();
     void onActionView();
     void onActionEdit();
+    void onActionDelete();
+    void updateActions();
     void onClearFilters();
 
 private:
     Ui::MainWindow *ui;
-    QStandardItemModel *model;
+    TicketTableModel *model;
     QLabel *lblStats;
 };
 #endif
