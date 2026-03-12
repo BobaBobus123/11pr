@@ -12,6 +12,7 @@ add_executable(Helpdesk
     mainwindow.cpp mainwindow.h mainwindow.ui
     ticketdialog.cpp ticketdialog.h ticketdialog.ui
     tickettablemodel.cpp tickettablemodel.h
+    tickettablemodel.h tickettablemodel.cpp
 )
 
 target_link_libraries(Helpdesk PRIVATE Qt6::Widgets)

@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "ticketdialog.h"
+#include <QMessageBox>
 #include <QHeaderView>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -9,18 +10,15 @@ MainWindow::MainWindow(QWidget *parent)
 
     model = new TicketTableModel(this);
     ui->tableView->setModel(model);
-
     ui->tableView->setSelectionBehavior(QAbstractItemView::SelectRows);
     ui->tableView->setSelectionMode(QAbstractItemView::SingleSelection);
     ui->tableView->horizontalHeader()->setSectionResizeMode(TicketTableModel::TitleCol, QHeaderView::Stretch);
 
     connect(ui->tableView->selectionModel(), &QItemSelectionModel::selectionChanged, this, &MainWindow::updateActions);
-
     connect(ui->actionNew, &QAction::triggered, this, &MainWindow::onActionNew);
     connect(ui->actionView, &QAction::triggered, this, &MainWindow::onActionView);
     connect(ui->actionEdit, &QAction::triggered, this, &MainWindow::onActionEdit);
     connect(ui->actionDelete, &QAction::triggered, this, &MainWindow::onActionDelete);
-    connect(ui->btnClear, &QPushButton::clicked, this, &MainWindow::onClearFilters);
 
     updateActions();
 }
@@ -59,11 +57,13 @@ void MainWindow::onActionView() {
 
 void MainWindow::onActionDelete() {
     QModelIndex current = ui->tableView->currentIndex();
-    if (current.isValid()) model->removeTicket(current.row());
-}
+    if (!current.isValid()) return;
 
-void MainWindow::onClearFilters() {
-    ui->editSearch->clear();
+
+    auto res = QMessageBox::question(this, "Видалення", "Ви впевнені, що хочете видалити заявку?");
+    if (res == QMessageBox::Yes) {
+        model->removeTicket(current.row());
+    }
 }
 
 MainWindow::~MainWindow() { delete ui; }

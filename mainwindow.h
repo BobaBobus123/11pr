@@ -2,7 +2,6 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QLabel>
 #include "tickettablemodel.h"
 
 QT_BEGIN_NAMESPACE
@@ -21,11 +20,9 @@ private slots:
     void onActionEdit();
     void onActionDelete();
     void updateActions();
-    void onClearFilters();
 
 private:
     Ui::MainWindow *ui;
     TicketTableModel *model;
-    QLabel *lblStats;
 };
 #endif
