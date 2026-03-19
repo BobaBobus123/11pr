@@ -9,11 +9,15 @@ find_package(Qt6 REQUIRED COMPONENTS Widgets)
 
 add_executable(Helpdesk
     main.cpp
-    mainwindow.cpp mainwindow.h mainwindow.ui
-    ticketdialog.cpp ticketdialog.h ticketdialog.ui
-    tickettablemodel.cpp tickettablemodel.h
-    tickettablemodel.h tickettablemodel.cpp
-    csvticketrepository.h csvticketrepository.cpp
-)
+    mainwindow.cpp
+    mainwindow.h
+    mainwindow.ui
+    tickettablemodel.cpp
+    tickettablemodel.h
+    ticketdialog.cpp
+    ticketdialog.h
+    ticketdialog.ui
+    csvticketrepository.cpp
+    csvticketrepository.h)
 
 target_link_libraries(Helpdesk PRIVATE Qt6::Widgets)
